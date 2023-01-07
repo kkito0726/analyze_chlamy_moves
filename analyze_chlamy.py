@@ -38,15 +38,15 @@ def draw_moves(data, movie_height=841.59, threshold=230, dpi=300):
     y_list = [data[data["TRACK_ID"] == i]["POSITION_Y"].values for i in id]
     
     plt.figure(dpi=dpi)
-    for i in range(len(x_list)):
-        x_diff = np.diff(x_list[i])
-        y_diff = np.diff(y_list[i])
+    for x, y in zip(x_list, y_list):
+        x_diff = np.diff(x)
+        y_diff = np.diff(y)
         # 移動距離の合計を算出
         move_sum = np.sqrt(x_diff**2 + y_diff**2).sum()
         
         if move_sum > threshold:
-            z = range(len(x_list[i]))
-            mp = plt.scatter(x_list[i], movie_height - y_list[i], c=z, s=0.1)
+            z = range(len(x))
+            mp = plt.scatter(x, movie_height - y, c=z, s=0.1)
             plt.xlabel("X (μm)")
             plt.ylabel("Y (μm)")
             plt.xlim(0,1200)
