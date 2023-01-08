@@ -39,8 +39,7 @@ def draw_moves(data, movie_height=841.59, threshold=230, dpi=300):
     
     plt.figure(dpi=dpi)
     for x, y in zip(x_list, y_list):
-        x_diff = np.diff(x)
-        y_diff = np.diff(y)
+        x_diff, y_diff = np.diff(x), np.diff(y)
         # 移動距離の合計を算出
         move_sum = np.sqrt(x_diff**2 + y_diff**2).sum()
         
@@ -91,9 +90,7 @@ if __name__ == '__main__':
     track_csv = "./track_1-601.csv"
     
     data = read_data(spot_csv, track_csv)
-    
     draw_moves(data)
     
     frequency_list = calc_frequencies(data)
-    
     print(frequency_list)
