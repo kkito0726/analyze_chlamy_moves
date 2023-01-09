@@ -21,7 +21,7 @@ def read_data(spot_csv, track_csv, frame=601):
     
     return data
 
-def draw_moves(data, movie_height=841.59, threshold=230, dpi=300):
+def draw_moves(data, movie_height=841.59, threshold=0, dpi=300):
     id = np.unique(data["TRACK_ID"].values)
     '''
     TRACK_IDが同じものごとにグループ化
@@ -52,7 +52,7 @@ def draw_moves(data, movie_height=841.59, threshold=230, dpi=300):
             plt.ylim(0,1200)
     plt.show()
     
-def calc_frequencies(data, threshold=230, fps=600):
+def calc_frequencies(data, threshold=0, fps=600):
     id = np.unique(data["TRACK_ID"].values)
     
     x_list = [data[data["TRACK_ID"] == i]["POSITION_X"].values for i in id]
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     track_csv = "./track_1-601.csv"
     
     data = read_data(spot_csv, track_csv)
-    draw_moves(data)
+    draw_moves(data, threshold=0, dpi=150)
     
-    frequency_list = calc_frequencies(data)
+    frequency_list = calc_frequencies(data, threshold=230)
     print(frequency_list)
