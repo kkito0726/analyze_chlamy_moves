@@ -88,9 +88,10 @@ def calc_frequencies(data, threshold=0, fps=600):
 if __name__ == '__main__':
     spot_csv = "./spot_1-601.csv"
     track_csv = "./track_1-601.csv"
+    threshold = 230
     
     data = read_data(spot_csv, track_csv)
-    draw_moves(data, threshold=0, dpi=150)
+    draw_moves(data, threshold=threshold, dpi=150)
     
-    frequency_list = calc_frequencies(data, threshold=230)
+    frequency_list = calc_frequencies(data, threshold=threshold)
     print(frequency_list)
